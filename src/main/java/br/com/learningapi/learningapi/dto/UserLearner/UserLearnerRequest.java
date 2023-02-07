@@ -12,6 +12,7 @@ public class UserLearnerRequest {
 
     private String photoUser;
 
+
     // private List<UserAnnotation> annotations;
 
     // public Long getId() {
@@ -54,15 +55,21 @@ public class UserLearnerRequest {
         this.photoUser = photoUser;
     }
 
-    // public List<UserAnnotation> getAnnotations() {
-    //     return annotations;
+    // public Date getDateRegister() {
+    //     return dateRegister;
     // }
 
-    // public void setAnnotations(List<UserAnnotation> annotations) {
-    //     this.annotations = annotations;
+    // public void setDateRegister(Date dateRegister) {
+    //     this.dateRegister = dateRegister;
     // }
 
+    // public Date getInactivationDate() {
+    //     return inactivationDate;
+    // }
 
+    // public void setInactivationDate(Date inactivationDate) {
+    //     this.inactivationDate = inactivationDate;
+    // }
  
 
 }

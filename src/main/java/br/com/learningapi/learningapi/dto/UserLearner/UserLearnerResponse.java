@@ -1,5 +1,7 @@
 package br.com.learningapi.learningapi.dto.UserLearner;
 
+import java.util.Date;
+
 public class UserLearnerResponse {
 
     private Long id;
@@ -11,6 +13,10 @@ public class UserLearnerResponse {
     // private String passwordUser;
 
     private String photoUser;
+
+    private Date dateRegister;
+
+    private Date inactivationDate;
 
     // private List<UserAnnotation> annotations;
 
@@ -54,13 +60,20 @@ public class UserLearnerResponse {
         this.photoUser = photoUser;
     }
 
-    // public List<UserAnnotation> getAnnotations() {
-    //     return annotations;
-    // }
+    public Date getDateRegister() {
+        return dateRegister;
+    }
 
-    // public void setAnnotations(List<UserAnnotation> annotations) {
-    //     this.annotations = annotations;
-    // }
+    public void setDateRegister(Date dateRegister) {
+        this.dateRegister = dateRegister;
+    }
 
+    public Date getInactivationDate() {
+        return inactivationDate;
+    }
+
+    public void setInactivationDate(Date inactivationDate) {
+        this.inactivationDate = inactivationDate;
+    }
 
 }

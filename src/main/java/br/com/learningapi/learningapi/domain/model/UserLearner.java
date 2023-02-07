@@ -1,21 +1,37 @@
 package br.com.learningapi.learningapi.domain.model;
 
-import java.util.List;
+import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class UserLearner  {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idUsuario")
     private Long id;
 
     private String nameUser;
 
+    @Column(nullable = false, unique = true)
     private String emailUser;
 
+    @Column(nullable = false)
     private String passwordUser;
 
+    @Column(columnDefinition = "TEXT")
     private String photoUser;
+
+    @Column(nullable = false)
+    private Date dateRegister;
+
+    @Column(nullable = true)
+    private Date inactivationDate;
 
     // private List<UserAnnotation> annotations;
 
@@ -59,13 +75,25 @@ public class UserLearner  {
         this.photoUser = photoUser;
     }
 
-    // public List<UserAnnotation> getAnnotations() {
-    //     return annotations;
-    // }
+    public Date getDateRegister() {
+        return dateRegister;
+    }
 
-    // public void setAnnotations(List<UserAnnotation> annotations) {
-    //     this.annotations = annotations;
-    // }
+    public void setDateRegister(Date dateRegister) {
+        this.dateRegister = dateRegister;
+    }
+
+    public Date getInactivationDate() {
+        return inactivationDate;
+    }
+
+    public void setInactivationDate(Date inactivationDate) {
+        this.inactivationDate = inactivationDate;
+    }
+
+   
+
+   
 
 
     // @Override
