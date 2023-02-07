@@ -1,26 +1,26 @@
-package br.com.learningapi.learningapi.dto.UserAnnotation;
+package br.com.learningapi.learningapi.dto.UserLearner;
 
-public class UserLearnerResponse {
+public class UserLearnerRequest {
 
-    private Long id;
+    // private Long id;
 
     private String nameUser;
 
     private String emailUser;
 
-    // private String passwordUser;
+    private String passwordUser;
 
     private String photoUser;
 
     // private List<UserAnnotation> annotations;
 
-    public Long getId() {
-        return id;
-    }
+    // public Long getId() {
+    //     return id;
+    // }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // public void setId(Long id) {
+    //     this.id = id;
+    // }
 
     public String getNameUser() {
         return nameUser;
@@ -38,13 +38,13 @@ public class UserLearnerResponse {
         this.emailUser = emailUser;
     }
 
-    // public String getPasswordUser() {
-    //     return passwordUser;
-    // }
+    public String getPasswordUser() {
+        return passwordUser;
+    }
 
-    // public void setPasswordUser(String passwordUser) {
-    //     this.passwordUser = passwordUser;
-    // }
+    public void setPasswordUser(String passwordUser) {
+        this.passwordUser = passwordUser;
+    }
 
     public String getPhotoUser() {
         return photoUser;
@@ -62,5 +62,7 @@ public class UserLearnerResponse {
     //     this.annotations = annotations;
     // }
 
+
+ 
 
 }

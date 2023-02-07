@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.learningapi.learningapi.domain.model.UserLearner;
 import br.com.learningapi.learningapi.domain.repository.UserLearnerRepository;
-import br.com.learningapi.learningapi.dto.UserAnnotation.UserLearnerRequest;
-import br.com.learningapi.learningapi.dto.UserAnnotation.UserLearnerResponse;
+import br.com.learningapi.learningapi.dto.UserLearner.UserLearnerRequest;
+import br.com.learningapi.learningapi.dto.UserLearner.UserLearnerResponse;
 
 public class UserLearnerService implements CrudService<UserLearnerRequest, UserLearnerResponse> {
 

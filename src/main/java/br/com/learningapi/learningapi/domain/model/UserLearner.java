@@ -17,7 +17,7 @@ public class UserLearner  {
 
     private String photoUser;
 
-    private List<UserAnnotation> annotations;
+    // private List<UserAnnotation> annotations;
 
     public Long getId() {
         return id;
@@ -59,13 +59,13 @@ public class UserLearner  {
         this.photoUser = photoUser;
     }
 
-    public List<UserAnnotation> getAnnotations() {
-        return annotations;
-    }
+    // public List<UserAnnotation> getAnnotations() {
+    //     return annotations;
+    // }
 
-    public void setAnnotations(List<UserAnnotation> annotations) {
-        this.annotations = annotations;
-    }
+    // public void setAnnotations(List<UserAnnotation> annotations) {
+    //     this.annotations = annotations;
+    // }
 
 
     // @Override
