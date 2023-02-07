@@ -41,7 +41,7 @@ public class UserLearnerService implements CrudService<UserLearnerRequest, UserL
         Optional<UserLearner> userLearnerModel = userLearnerRepository.findById(id);
 
         if(userLearnerModel.isEmpty()) {
-            throw new Error("O usuário de id: " + id + " não ofi encontrado.");
+            throw new Error("O usuário de id: " + id + " não foi encontrado.");
         }
 
         UserLearnerResponse userLearnerResponse = mapper.map(userLearnerModel.get(), UserLearnerResponse.class);

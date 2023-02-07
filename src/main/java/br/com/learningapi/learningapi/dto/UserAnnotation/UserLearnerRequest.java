@@ -2,55 +2,65 @@ package br.com.learningapi.learningapi.dto.UserAnnotation;
 
 public class UserLearnerRequest {
 
-    private String name;
+    // private Long id;
 
-  
-    private String email;
+    private String nameUser;
 
- 
-    private String password;
+    private String emailUser;
 
-    private String photo;
+    private String passwordUser;
 
+    private String photoUser;
 
-    public String getName() {
-        return name;
+    // private List<UserAnnotation> annotations;
+
+    // public Long getId() {
+    //     return id;
+    // }
+
+    // public void setId(Long id) {
+    //     this.id = id;
+    // }
+
+    public String getNameUser() {
+        return nameUser;
     }
 
-
-    public void setName(String name) {
-        this.name = name;
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
     }
 
-
-    public String getEmail() {
-        return email;
+    public String getEmailUser() {
+        return emailUser;
     }
 
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
     }
 
-
-    public String getPassword() {
-        return password;
+    public String getPasswordUser() {
+        return passwordUser;
     }
 
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordUser(String passwordUser) {
+        this.passwordUser = passwordUser;
     }
 
-
-    public String getPhoto() {
-        return photo;
+    public String getPhotoUser() {
+        return photoUser;
     }
 
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPhotoUser(String photoUser) {
+        this.photoUser = photoUser;
     }
+
+    // public List<UserAnnotation> getAnnotations() {
+    //     return annotations;
+    // }
+
+    // public void setAnnotations(List<UserAnnotation> annotations) {
+    //     this.annotations = annotations;
+    // }
 
 
  

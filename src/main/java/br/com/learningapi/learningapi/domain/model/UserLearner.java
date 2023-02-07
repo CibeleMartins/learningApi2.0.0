@@ -1,39 +1,22 @@
 package br.com.learningapi.learningapi.domain.model;
 
-import java.util.Collection;
 import java.util.List;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 @Entity
-public class UserLearner implements UserDetails {
+public class UserLearner  {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "id_user")
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
+    private String nameUser;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+    private String emailUser;
 
-    @Column(nullable = false)
-    private String password;
+    private String passwordUser;
 
-    @Column(columnDefinition = "TEXT")
-    private String photo;
+    private String photoUser;
 
-    @OneToMany(mappedBy = "user_learner")
     private List<UserAnnotation> annotations;
 
     public Long getId() {
@@ -44,36 +27,36 @@ public class UserLearner implements UserDetails {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameUser() {
+        return nameUser;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailUser() {
+        return emailUser;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
     }
 
     public String getPasswordUser() {
-        return password;
+        return passwordUser;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordUser(String passwordUser) {
+        this.passwordUser = passwordUser;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getPhotoUser() {
+        return photoUser;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPhotoUser(String photoUser) {
+        this.photoUser = photoUser;
     }
 
     public List<UserAnnotation> getAnnotations() {
@@ -84,44 +67,45 @@ public class UserLearner implements UserDetails {
         this.annotations = annotations;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        return null;
-    }
+    // @Override
+    // public Collection<? extends GrantedAuthority> getAuthorities() {
 
-    @Override
-    public String getPassword() {
+    //     return null;
+    // }
 
-        return password;
-    }
+    // @Override
+    // public String getPassword() {
 
-    @Override
-    public String getUsername() {
+    //     return password;
+    // }
 
-        return email;
-    }
+    // @Override
+    // public String getUsername() {
 
-    @Override
-    public boolean isAccountNonExpired() {
+    //     return email;
+    // }
 
-        return true;
-    }
+    // @Override
+    // public boolean isAccountNonExpired() {
 
-    @Override
-    public boolean isAccountNonLocked() {
+    //     return true;
+    // }
 
-        return true;
-    }
+    // @Override
+    // public boolean isAccountNonLocked() {
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
+    //     return true;
+    // }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+    // @Override
+    // public boolean isCredentialsNonExpired() {
+    //     return false;
+    // }
+
+    // @Override
+    // public boolean isEnabled() {
+    //     return true;
+    // }
 
 }
