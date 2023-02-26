@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import br.com.personal.expenses.personalexpenses.domain.model.UserAdmin;
+import br.com.learningapi.learningapi.domain.model.UserLearner;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -38,7 +38,7 @@ public class JwtUtil {
         // pega a data atual e soma mais um dia em milisegundos
 
         // saber quem é o usuário que está gerando o token?
-        UserAdmin userAdmin = (UserAdmin) authentication.getPrincipal();
+        UserLearner userAdmin = (UserLearner) authentication.getPrincipal();
         // getPrincipal() devolve um objeto, por isso um cast
         // para o que vier no objeto ser convertido em um usuário
         // assim, pega o usuário autenticado
