@@ -19,7 +19,7 @@ public class UserLearner implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
+    @Column(name = "idUser")
     private Long id;
 
     private String nameUser;

@@ -36,7 +36,7 @@ public class UserAnnotation {
     private String color;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "idUser")
     private UserLearner user;
 
     public Long getId() {
@@ -85,6 +85,16 @@ public class UserAnnotation {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public UserLearner getUser() {
+
+        return user;
+    }
+
+    public void setUser(UserLearner user) {
+
+        this.user = user;
     }
 
   
