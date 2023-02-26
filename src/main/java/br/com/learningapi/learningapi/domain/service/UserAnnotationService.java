@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import br.com.learningapi.learningapi.domain.exception.ResourceNotFoundException;
 import br.com.learningapi.learningapi.domain.model.UserAnnotation;
@@ -15,6 +16,7 @@ import br.com.learningapi.learningapi.domain.repository.UserAnnotationRepository
 import br.com.learningapi.learningapi.dto.UserAnnotation.UserAnnotationReqDTO;
 import br.com.learningapi.learningapi.dto.UserAnnotation.UserAnnotationRespDTO;
 
+@Service
 public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, UserAnnotationRespDTO> {
     
     @Autowired

@@ -39,8 +39,8 @@ public class UserLearner implements UserDetails {
     @Column(nullable = true)
     private Date inactivationDate;
 
-    @OneToMany(mappedBy="user_learner")
-    private List<UserAnnotation> annotations;
+    // @OneToMany(mappedBy="user_learner")
+    // private List<UserAnnotation> annotations;
 
     public Long getId() {
         return id;

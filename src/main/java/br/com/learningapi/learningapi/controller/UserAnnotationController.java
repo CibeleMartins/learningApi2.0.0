@@ -21,7 +21,7 @@ import br.com.learningapi.learningapi.dto.UserAnnotation.UserAnnotationRespDTO;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/cost_center")
+@RequestMapping("/api/annotations")
 public class UserAnnotationController {
     
     @Autowired
