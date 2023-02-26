@@ -1,6 +1,10 @@
 package br.com.learningapi.learningapi.domain.model;
 
+import java.util.Collection;
 import java.util.Date;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class UserLearner  {
+public class UserLearner implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -91,49 +95,44 @@ public class UserLearner  {
         this.inactivationDate = inactivationDate;
     }
 
-   
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
 
-   
+        return null;
+    }
 
+    @Override
+    public String getPassword() {
 
-    // @Override
-    // public Collection<? extends GrantedAuthority> getAuthorities() {
+        return passwordUser;
+    }
 
-    //     return null;
-    // }
+    @Override
+    public String getUsername() {
 
-    // @Override
-    // public String getPassword() {
+        return emailUser;
+    }
 
-    //     return password;
-    // }
+    @Override
+    public boolean isAccountNonExpired() {
 
-    // @Override
-    // public String getUsername() {
+        return true;
+    }
 
-    //     return email;
-    // }
+    @Override
+    public boolean isAccountNonLocked() {
 
-    // @Override
-    // public boolean isAccountNonExpired() {
+        return true;
+    }
 
-    //     return true;
-    // }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
-    // @Override
-    // public boolean isAccountNonLocked() {
-
-    //     return true;
-    // }
-
-    // @Override
-    // public boolean isCredentialsNonExpired() {
-    //     return false;
-    // }
-
-    // @Override
-    // public boolean isEnabled() {
-    //     return true;
-    // }
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 }
