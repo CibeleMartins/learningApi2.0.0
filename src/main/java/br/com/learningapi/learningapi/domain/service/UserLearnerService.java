@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.learningapi.learningapi.domain.exception.ResourceNotFoundException;
@@ -24,6 +25,8 @@ public class UserLearnerService implements CrudService<UserLearnerRequest, UserL
     @Autowired
     private ModelMapper mapper;
 
+    @Autowired // criptografar senha do usuário
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public List<UserLearnerResponse> getAll() {
@@ -31,7 +34,8 @@ public class UserLearnerService implements CrudService<UserLearnerRequest, UserL
         // pega os usuários do BD
         List<UserLearner> usersModel = userLearnerRepository.findAll();
 
-        List<UserLearnerResponse> usersDto = usersModel.stream().map(u -> mapper.map(u, UserLearnerResponse.class)).collect(Collectors.toList());
+        List<UserLearnerResponse> usersDto = usersModel.stream().map(u -> mapper.map(u, UserLearnerResponse.class))
+                .collect(Collectors.toList());
 
         return usersDto;
     }
@@ -53,10 +57,11 @@ public class UserLearnerService implements CrudService<UserLearnerRequest, UserL
     @Override
     public UserLearnerResponse register(UserLearnerRequest dto) {
 
-        // UserLearner userModel = mapper.map(dto, UserLearner.class);
-
         UserLearner userModel = mapper.map(dto, UserLearner.class);
-      
+
+        // criptografa a senha do usuário
+        String passwordUser = passwordEncoder.encode(userModel.getPasswordUser());
+        userModel.setPasswordUser(passwordUser);
         userModel.setId(null);
         userModel.setDateRegister(new Date());
         userModel = userLearnerRepository.save(userModel);
@@ -72,9 +77,14 @@ public class UserLearnerService implements CrudService<UserLearnerRequest, UserL
         // obtem o usuário pelo id
         UserLearnerResponse userDto = getById(id);
 
+        
+        // criptografa a senha do usuário
+        String passwordUser = passwordEncoder.encode(dto.getPasswordUser());
+
         // transforma o usuario request em model
         UserLearner userModel = mapper.map(dto, UserLearner.class);
 
+        userModel.setPasswordUser(passwordUser);
         // seta o id e a data de inatiacao p/ o que ja estava no banco
         userModel.setId(id);
         userModel.setInactivationDate(userDto.getInactivationDate());
@@ -95,11 +105,10 @@ public class UserLearnerService implements CrudService<UserLearnerRequest, UserL
         // apenas seta a data de inativacao
         // e atualiza esse usuário no banco
 
-       Optional<UserLearner> userOptModel = userLearnerRepository.findById(id);
+        Optional<UserLearner> userOptModel = userLearnerRepository.findById(id);
 
-
-       if (userOptModel.isEmpty()) {
-        throw new ResourceNotFoundException("Não foi possível encontrar o usuário com o id: " + id);
+        if (userOptModel.isEmpty()) {
+            throw new ResourceNotFoundException("Não foi possível encontrar o usuário com o id: " + id);
         }
 
         UserLearner userModel = userOptModel.get();
