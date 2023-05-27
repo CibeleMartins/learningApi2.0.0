@@ -49,7 +49,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         this.userLearnerRepository = userLearnerRepository;
         // esse método recebe uma url que fará com que só chegue 
         // nesse filtro de autenticação criado, caso acesse o usuário acesse essa url
-        setFilterProcessesUrl("/api/users");
+        setFilterProcessesUrl("/api/users/auth");
     }
 
     // existe um método da classe extendida 

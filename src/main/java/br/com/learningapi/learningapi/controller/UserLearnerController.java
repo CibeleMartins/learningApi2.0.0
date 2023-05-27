@@ -21,7 +21,7 @@ import br.com.learningapi.learningapi.dto.UserLearner.UserLearnerResponse;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/users/service")
+@RequestMapping("/api/users")
 public class UserLearnerController {
     
     @Autowired
