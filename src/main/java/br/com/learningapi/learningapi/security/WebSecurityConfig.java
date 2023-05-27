@@ -11,13 +11,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import br.com.learningapi.learningapi.domain.repository.UserLearnerRepository;
 
 
 @Configuration
 @EnableWebSecurity //diz que é um config de segurança web
-public class WebSecurityConfig {
+public class WebSecurityConfig implements WebMvcConfigurer {
     
     @Autowired
     private JwtUtil jwtUtil;
@@ -47,12 +48,19 @@ public class WebSecurityConfig {
         // desabilita algumas coisas e para cada requisição toma uma ação
         http.headers().frameOptions()
         .disable().and().cors().and()
-        .csrf().disable().authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.POST, "/api/users", "/api/users/service").permitAll().anyRequest().authenticated()).sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        .csrf().disable().authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.POST, "/api/users").permitAll().anyRequest().authenticated()).sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // qualquer outra requisição que não seja POST vai precisar estar autenticado para conseguir fazer
         
         http.addFilter(new JwtAuthenticationFilter(authenticationManager(authConfiguration), jwtUtil, userLearnerRepository));
         http.addFilter(new JwtAuthorizationFilter(authenticationManager(authConfiguration), jwtUtil, userDetails));
 
         return http.build();
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+            .allowedOrigins("http://localhost:4200")
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
     }
 }
