@@ -47,7 +47,7 @@ public class WebSecurityConfig {
         // desabilita algumas coisas e para cada requisição toma uma ação
         http.headers().frameOptions()
         .disable().and().cors().and()
-        .csrf().disable().authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.POST, "/api/users").permitAll().anyRequest().authenticated()).sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        .csrf().disable().authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.POST, "/api/users", "/api/users/service").permitAll().anyRequest().authenticated()).sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // qualquer outra requisição que não seja POST vai precisar estar autenticado para conseguir fazer
         
         http.addFilter(new JwtAuthenticationFilter(authenticationManager(authConfiguration), jwtUtil, userLearnerRepository));
