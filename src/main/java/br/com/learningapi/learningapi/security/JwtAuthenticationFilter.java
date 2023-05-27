@@ -98,7 +98,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         userResponse.setPhotoUser(user.getPhotoUser());
         userResponse.setInactivationDate(user.getInactivationDate());
         userResponse.setDateRegister(user.getDateRegister());
-        // Optional<UserLearner> userOptModel = userLearnerRepository.findByEmailUser(userResponse.getEmailUser());
+        // Optional<UserLearner> userAutenticado = userLearnerRepository.findByEmailUser(userResponse.getEmailUser());
         userResponse.setIsFirstLogin(isFirstLogin(user.getFirstLoginDate(), user));   
      
         // cria um usuário login response com o token e as infos do usuário response dto
@@ -133,11 +133,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
 
-    public Boolean isFirstLogin(Date dataFirstLogin, UserLearner userOptModel) {
+    public Boolean isFirstLogin(Date dataFirstLogin, UserLearner userAutenticado) {
 
         if(dataFirstLogin == null) {
-            userOptModel.setFirstLoginDate(new Date());
-           this.userLearnerRepository.save(userOptModel);
+            userAutenticado.setFirstLoginDate(new Date());
+           this.userLearnerRepository.save(userAutenticado);
 
             return true;
         }
