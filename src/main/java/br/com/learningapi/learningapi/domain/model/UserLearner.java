@@ -39,6 +39,9 @@ public class UserLearner implements UserDetails {
     @Column(nullable = true)
     private Date inactivationDate;
 
+    @Column(nullable = true)
+    private Date firstLoginDate;
+
     // @OneToMany(mappedBy="user_learner")
     // private List<UserAnnotation> annotations;
 
@@ -96,6 +99,14 @@ public class UserLearner implements UserDetails {
 
     public void setInactivationDate(Date inactivationDate) {
         this.inactivationDate = inactivationDate;
+    }
+
+    public Date getFirstLoginDate() {
+        return firstLoginDate;
+    }
+
+    public void setFirstLoginDate(Date firstLoginDate) {
+        this.firstLoginDate = firstLoginDate;
     }
 
     @Override

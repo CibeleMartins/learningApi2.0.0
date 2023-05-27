@@ -12,6 +12,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import br.com.learningapi.learningapi.domain.repository.UserLearnerRepository;
+
 
 @Configuration
 @EnableWebSecurity //diz que é um config de segurança web
@@ -19,7 +21,10 @@ public class WebSecurityConfig {
     
     @Autowired
     private JwtUtil jwtUtil;
-
+    
+    @Autowired
+    private UserLearnerRepository userLearnerRepository;
+    
     @Autowired
     private AuthenticationConfiguration authConfiguration;
 
@@ -45,7 +50,7 @@ public class WebSecurityConfig {
         .csrf().disable().authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.POST, "/api/users").permitAll().anyRequest().authenticated()).sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // qualquer outra requisição que não seja POST vai precisar estar autenticado para conseguir fazer
         
-        http.addFilter(new JwtAuthenticationFilter(authenticationManager(authConfiguration), jwtUtil));
+        http.addFilter(new JwtAuthenticationFilter(authenticationManager(authConfiguration), jwtUtil, userLearnerRepository));
         http.addFilter(new JwtAuthorizationFilter(authenticationManager(authConfiguration), jwtUtil, userDetails));
 
         return http.build();

@@ -18,6 +18,8 @@ public class UserLearnerResponse {
 
     private Date inactivationDate;
 
+    private Boolean isFirstLogin;
+
     // private List<UserAnnotation> annotations;
 
     public Long getId() {
@@ -76,4 +78,11 @@ public class UserLearnerResponse {
         this.inactivationDate = inactivationDate;
     }
 
+    public Boolean getIsFirstLogin() {
+        return isFirstLogin;
+    }
+
+    public void setIsFirstLogin(Boolean isFirstLogin) {
+       this.isFirstLogin = isFirstLogin;
+    }
 }

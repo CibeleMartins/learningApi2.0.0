@@ -2,7 +2,9 @@ package br.com.learningapi.learningapi.security;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -15,8 +17,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import br.com.learningapi.learningapi.common.ConvertDate;
+import br.com.learningapi.learningapi.domain.exception.ResourceNotFoundException;
 import br.com.learningapi.learningapi.domain.model.ErrorMessageResponse;
 import br.com.learningapi.learningapi.domain.model.UserLearner;
+import br.com.learningapi.learningapi.domain.repository.UserLearnerRepository;
 import br.com.learningapi.learningapi.dto.UserLearner.UserLearnerLoginReqDTO;
 import br.com.learningapi.learningapi.dto.UserLearner.UserLearnerLoginRespDTO;
 import br.com.learningapi.learningapi.dto.UserLearner.UserLearnerResponse;
@@ -29,21 +33,23 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     // essa classe é um filter e vai extender outra para sobrescrever alguns métodos
     // essa classe é utilizada pelo spring para filtrar alguma coisa na autenticação
 
+    private UserLearnerRepository userLearnerRepository;
+
     private AuthenticationManager authenticationManager;
 
     private JwtUtil jwtUtil;
 
     // esses atributos vão ser recebidos no construtor dessa classe
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserLearnerRepository userLearnerRepository) {
         // chama os métodos da classe pai
         super();
         // constrói a propriedades de acordo com os parâmetros recebidos
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
-
+        this.userLearnerRepository = userLearnerRepository;
         // esse método recebe uma url que fará com que só chegue 
         // nesse filtro de autenticação criado, caso acesse o usuário acesse essa url
-        setFilterProcessesUrl("/api/users/auth");
+        setFilterProcessesUrl("/api/users");
     }
 
     // existe um método da classe extendida 
@@ -92,8 +98,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         userResponse.setPhotoUser(user.getPhotoUser());
         userResponse.setInactivationDate(user.getInactivationDate());
         userResponse.setDateRegister(user.getDateRegister());
-    
-
+        // Optional<UserLearner> userOptModel = userLearnerRepository.findByEmailUser(userResponse.getEmailUser());
+        userResponse.setIsFirstLogin(isFirstLogin(user.getFirstLoginDate(), user));   
+     
         // cria um usuário login response com o token e as infos do usuário response dto
         UserLearnerLoginRespDTO userLoginResponse = new  UserLearnerLoginRespDTO();
         userLoginResponse.setTokenAuthorization("Bearer" + token);
@@ -125,4 +132,16 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.getWriter().write(new Gson().toJson(error));
     }
 
+
+    public Boolean isFirstLogin(Date dataFirstLogin, UserLearner userOptModel) {
+
+        if(dataFirstLogin == null) {
+            userOptModel.setFirstLoginDate(new Date());
+           this.userLearnerRepository.save(userOptModel);
+
+            return true;
+        }
+
+        return false;
+    }
 }
