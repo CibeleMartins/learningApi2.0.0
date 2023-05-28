@@ -9,12 +9,7 @@ public class UserAnnotationReqDTO {
 
     private Date date;
 
-    private String description;
-
     private String annotation;
-
-    private String color;
-
 
     public String getTitle() {
         return title;
@@ -36,16 +31,6 @@ public class UserAnnotationReqDTO {
     }
 
 
-    public String getDescription() {
-        return description;
-    }
-
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
     public String getAnnotation() {
         return annotation;
     }
@@ -53,16 +38,6 @@ public class UserAnnotationReqDTO {
 
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
-    }
-
-
-    public String getColor() {
-        return color;
-    }
-
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
 }

@@ -26,14 +26,8 @@ public class UserAnnotation {
     @Column(nullable = false)
     private Date date;
 
-    @Column(nullable = true)
-    private String description;
-
     @Column(columnDefinition = "TEXT", nullable = false)
     private String annotation;
-
-    @Column(nullable = true)
-    private String color;
 
     @ManyToOne
     @JoinColumn(name = "idUser")
@@ -63,28 +57,12 @@ public class UserAnnotation {
         this.date = date;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getAnnotation() {
         return annotation;
     }
 
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public UserLearner getUser() {
