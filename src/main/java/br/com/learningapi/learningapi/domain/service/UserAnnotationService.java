@@ -27,8 +27,8 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
 
     @Override
     public List<UserAnnotationRespDTO> getAll() {
-       
-        List<UserAnnotation> costsCentersRepository = userAnnotationRepository.findAll();
+        UserLearner user = (UserLearner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<UserAnnotation> costsCentersRepository = userAnnotationRepository.findByUser(user);
 
         return costsCentersRepository.stream().map(UserAnnotation -> mapper.map(UserAnnotation, UserAnnotationRespDTO.class)).collect(Collectors.toList());
     }

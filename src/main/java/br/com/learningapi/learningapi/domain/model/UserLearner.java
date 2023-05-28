@@ -42,7 +42,7 @@ public class UserLearner implements UserDetails {
     @Column(nullable = true)
     private Date firstLoginDate;
 
-    // @OneToMany(mappedBy="user_learner")
+    // @OneToMany(mappedBy="idUser")
     // private List<UserAnnotation> annotations;
 
     public Long getId() {
