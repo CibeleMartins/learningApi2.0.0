@@ -1,14 +1,17 @@
 package br.com.learningapi.learningapi.domain.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import br.com.learningapi.learningapi.common.ConvertDate;
 import br.com.learningapi.learningapi.domain.exception.ResourceNotFoundException;
 import br.com.learningapi.learningapi.domain.model.UserAnnotation;
 import br.com.learningapi.learningapi.domain.model.UserLearner;
@@ -28,9 +31,24 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
     @Override
     public List<UserAnnotationRespDTO> getAll() {
         UserLearner user = (UserLearner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<UserAnnotation> costsCentersRepository = userAnnotationRepository.findByUser(user);
+        List<UserAnnotation> listUserAnnotations = userAnnotationRepository.findByUser(user);
+     
+        List<UserAnnotationRespDTO> list = (List<UserAnnotationRespDTO>) listUserAnnotations.stream().map(uA ->{
 
-        return costsCentersRepository.stream().map(UserAnnotation -> mapper.map(UserAnnotation, UserAnnotationRespDTO.class)).collect(Collectors.toList());
+            UserAnnotation userAnnotation = uA;
+
+            String dateHour =  userAnnotation.getDate();
+
+            Date dateFormated = ConvertDate.convertDateAnnotation(dateHour);
+
+            String dateFinalFormated = ConvertDate.convertDateForDateHour(dateFormated);
+            UserAnnotationRespDTO userRespDTO = mapper.map(userAnnotation, UserAnnotationRespDTO.class);
+            
+            userRespDTO.setDate(dateFinalFormated);
+            return userRespDTO;
+        }).collect(Collectors.toList());
+       
+        return list;
     }
 
     @Override

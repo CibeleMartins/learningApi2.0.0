@@ -8,7 +8,7 @@ public class UserAnnotationRespDTO {
     
     private String title;
 
-    private Date date;
+    private String date;
 
     private String annotation;
 
@@ -30,12 +30,12 @@ public class UserAnnotationRespDTO {
     }
 
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

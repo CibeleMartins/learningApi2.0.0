@@ -24,7 +24,7 @@ public class UserAnnotation {
     private String title;
 
     @Column(nullable = false)
-    private Date date;
+    private String date;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String annotation;
@@ -49,11 +49,11 @@ public class UserAnnotation {
         this.title = title;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

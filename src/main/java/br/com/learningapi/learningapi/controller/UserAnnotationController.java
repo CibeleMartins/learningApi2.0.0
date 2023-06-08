@@ -40,15 +40,15 @@ public class UserAnnotationController {
     }
 
     @PostMapping
-    public ResponseEntity<UserAnnotationRespDTO> register(@RequestBody UserAnnotationReqDTO costCenter) {
+    public ResponseEntity<UserAnnotationRespDTO> register(@RequestBody UserAnnotationReqDTO annotation) {
 
-        return new ResponseEntity<>(userAnnotationService.register(costCenter), HttpStatus.CREATED);
+        return new ResponseEntity<>(userAnnotationService.register(annotation), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserAnnotationRespDTO> update(@PathVariable Long id ,@RequestBody UserAnnotationReqDTO costCenter) {
+    public ResponseEntity<UserAnnotationRespDTO> update(@PathVariable Long id ,@RequestBody UserAnnotationReqDTO annotation) {
 
-        return new ResponseEntity<>(userAnnotationService.updateById(id,costCenter), HttpStatus.OK);
+        return new ResponseEntity<>(userAnnotationService.updateById(id,annotation), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
