@@ -1,6 +1,5 @@
 package br.com.learningapi.learningapi.domain.model;
 
-import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
