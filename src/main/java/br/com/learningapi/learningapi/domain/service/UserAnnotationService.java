@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -80,8 +81,12 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
 
         UserLearner user = (UserLearner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserAnnotationModel.setUser(user);
-
         UserAnnotationModel.setId(id);
+        String dateAnnotationModel = UserAnnotationModel.getDate();
+        Date dateConverted = ConvertDate.convertDateAnnotation(dateAnnotationModel);
+        String dateConvertedFormated = ConvertDate.convertDateForDateHour(dateConverted);
+        UserAnnotationModel.setDate(dateConvertedFormated);
+
         UserAnnotationModel = userAnnotationRepository.save(UserAnnotationModel);
       
         return mapper.map(UserAnnotationModel, UserAnnotationRespDTO.class);
