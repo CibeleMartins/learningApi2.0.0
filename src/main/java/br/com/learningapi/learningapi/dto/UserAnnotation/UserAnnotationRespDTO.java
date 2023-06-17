@@ -14,7 +14,7 @@ public class UserAnnotationRespDTO {
 
     private String annotation;
 
-  public Long getId() {
+    public Long getId() {
         return id;
     }
 

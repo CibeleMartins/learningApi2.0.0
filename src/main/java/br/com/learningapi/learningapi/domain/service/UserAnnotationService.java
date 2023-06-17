@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import br.com.learningapi.learningapi.common.ConvertDate;
@@ -89,8 +90,10 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
         UserAnnotationModel.setUpdatedAt(dateUpdatedAnnotationFormatted);
 
         UserAnnotationModel = userAnnotationRepository.save(UserAnnotationModel);
-      
-        return mapper.map(UserAnnotationModel, UserAnnotationRespDTO.class);
+
+        UserAnnotationRespDTO responseAnnotation = mapper.map(UserAnnotationModel, UserAnnotationRespDTO.class);
+        responseAnnotation.setUpdatedAt(dateUpdatedAnnotationFormatted);
+        return responseAnnotation;
     }
 
     @Override
