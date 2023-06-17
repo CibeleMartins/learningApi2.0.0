@@ -58,11 +58,9 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
 
         // define que o usuário que criou o centro de custo foi o usuário que fez a requisição
         userAnnotationModel.setUser(user);
-        String dateString = userAnnotationModel.getDate();
-
-        String dateStringFormated = ConvertDate.convertDateAnnotation(dateString);
-
-        userAnnotationModel.setDate(dateStringFormated);
+        Date dateRgisteredAnnotation = new Date();
+        String dateRegisteredAnnotationFormatted = ConvertDate.convertDateForDateHour(dateRgisteredAnnotation);
+        userAnnotationModel.setCreatedAt(dateRegisteredAnnotationFormatted);
 
         userAnnotationModel.setId(null);
 
@@ -75,14 +73,20 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
     public UserAnnotationRespDTO updateById(Long id, UserAnnotationReqDTO dto) {
 
         getById(id);
+
+        UserAnnotationRespDTO annotationFinded = getById(id);
+
+
         UserAnnotation UserAnnotationModel = mapper.map(dto, UserAnnotation.class);
 
         UserLearner user = (UserLearner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserAnnotationModel.setUser(user);
         UserAnnotationModel.setId(id);
-        String dateAnnotationModel = UserAnnotationModel.getDate();
-        String dateConvertedFormated = ConvertDate.convertDateAnnotation(dateAnnotationModel);
-        UserAnnotationModel.setDate(dateConvertedFormated);
+        UserAnnotationModel.setCreatedAt(annotationFinded.getCreatedAt());
+    
+        Date dateUpdatedAnnotation = new Date();
+        String dateUpdatedAnnotationFormatted = ConvertDate.convertDateForDateHour(dateUpdatedAnnotation);
+        UserAnnotationModel.setUpdatedAt(dateUpdatedAnnotationFormatted);
 
         UserAnnotationModel = userAnnotationRepository.save(UserAnnotationModel);
       

@@ -22,8 +22,11 @@ public class UserAnnotation {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
-    private String date;
+    @Column(nullable = true)
+    private String createdAt;
+
+    @Column(nullable = true)
+    private String updatedAt;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String annotation;
@@ -48,12 +51,12 @@ public class UserAnnotation {
         this.title = title;
     }
 
-    public String getDate() {
-        return date;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getAnnotation() {
@@ -74,5 +77,12 @@ public class UserAnnotation {
         this.user = user;
     }
 
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+     public String setUpdatedAt(String lastUpdate) {
+        return this.updatedAt = lastUpdate;
+    }
   
 }

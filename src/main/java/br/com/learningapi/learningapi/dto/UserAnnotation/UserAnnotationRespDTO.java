@@ -1,6 +1,6 @@
 package br.com.learningapi.learningapi.dto.UserAnnotation;
 
-import java.util.Date;
+import br.com.learningapi.learningapi.domain.model.UserLearner;
 
 public class UserAnnotationRespDTO {
 
@@ -8,11 +8,13 @@ public class UserAnnotationRespDTO {
     
     private String title;
 
-    private String date;
+    private String createdAt;
+
+    private String updatedAt;
 
     private String annotation;
 
-    public Long getId() {
+  public Long getId() {
         return id;
     }
 
@@ -24,29 +26,32 @@ public class UserAnnotationRespDTO {
         return title;
     }
 
-
     public void setTitle(String title) {
         this.title = title;
     }
 
-
-    public String getDate() {
-        return date;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-
-    public void setDate(String date) {
-        this.date = date;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
-
 
     public String getAnnotation() {
         return annotation;
     }
 
-
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
     }
 
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+     public String setUpdatedAt(String lastUpdate) {
+        return this.updatedAt = lastUpdate;
+    }
+  
 }
