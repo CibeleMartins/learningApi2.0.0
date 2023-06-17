@@ -22,7 +22,7 @@ import br.com.learningapi.learningapi.dto.UserAnnotation.UserAnnotationRespDTO;
 
 @Service
 public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, UserAnnotationRespDTO> {
-    
+
     @Autowired
     private UserAnnotationRepository userAnnotationRepository;
 
@@ -33,16 +33,23 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
     public List<UserAnnotationRespDTO> getAll() {
         UserLearner user = (UserLearner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<UserAnnotation> listUserAnnotations = userAnnotationRepository.findByUser(user);
-    
-        return listUserAnnotations.stream().map(uA -> mapper.map(uA, UserAnnotationRespDTO.class)).collect(Collectors.toList());
+        List<UserAnnotationRespDTO> listAnnotationResponse = listUserAnnotations.stream().map(uA -> mapper.map(uA, UserAnnotationRespDTO.class)).collect(Collectors.toList());
+        int index = 0;
+        for (UserAnnotationRespDTO element : listAnnotationResponse) {
+
+            element.setUpdatedAt(listUserAnnotations.get(index).getUpdatedAt());
+            index++;
+        }
+
+        return listAnnotationResponse;
     }
 
     @Override
     public UserAnnotationRespDTO getById(Long id) {
-       
+
         Optional<UserAnnotation> UserAnnotationModelRepository = userAnnotationRepository.findById(id);
 
-        if(UserAnnotationModelRepository.isEmpty()) {
+        if (UserAnnotationModelRepository.isEmpty()) {
             throw new ResourceNotFoundException("Centro de custo não encontrado.");
         }
 
@@ -57,7 +64,8 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
         // quem é o usuário que faz essa requisição
         UserLearner user = (UserLearner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        // define que o usuário que criou o centro de custo foi o usuário que fez a requisição
+        // define que o usuário que criou o centro de custo foi o usuário que fez a
+        // requisição
         userAnnotationModel.setUser(user);
         Date dateRgisteredAnnotation = new Date();
         String dateRegisteredAnnotationFormatted = ConvertDate.convertDateForDateHour(dateRgisteredAnnotation);
@@ -66,7 +74,7 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
         userAnnotationModel.setId(null);
 
         userAnnotationModel = userAnnotationRepository.save(userAnnotationModel);
-     
+
         return mapper.map(userAnnotationModel, UserAnnotationRespDTO.class);
     }
 
@@ -77,14 +85,13 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
 
         UserAnnotationRespDTO annotationFinded = getById(id);
 
-
         UserAnnotation UserAnnotationModel = mapper.map(dto, UserAnnotation.class);
 
         UserLearner user = (UserLearner) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserAnnotationModel.setUser(user);
         UserAnnotationModel.setId(id);
         UserAnnotationModel.setCreatedAt(annotationFinded.getCreatedAt());
-    
+
         Date dateUpdatedAnnotation = new Date();
         String dateUpdatedAnnotationFormatted = ConvertDate.convertDateForDateHour(dateUpdatedAnnotation);
         UserAnnotationModel.setUpdatedAt(dateUpdatedAnnotationFormatted);
@@ -98,12 +105,9 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
 
     @Override
     public void deleteById(Long id) {
-        
+
         getById(id);
         userAnnotationRepository.deleteById(id);
     }
 
-    
-} 
-    
-
+}
