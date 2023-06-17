@@ -15,17 +15,16 @@ public class ConvertDate {
         return dateFormated;
     }
 
-    public static Date convertDateAnnotation(String date) {
+    public static String convertDateAnnotation(String date) {
         
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
-
-        Date dateFormated = new Date();
+        SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            dateFormated = format.parse(date);
+            Date data = formatoEntrada.parse(date);
+            return formatoSaida.format(data);
         } catch (ParseException e) {
             e.printStackTrace();
+            return null;
         }
-
-        return dateFormated;
     }
 }

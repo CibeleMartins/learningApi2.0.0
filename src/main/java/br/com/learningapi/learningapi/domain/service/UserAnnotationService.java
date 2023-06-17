@@ -60,9 +60,7 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
         userAnnotationModel.setUser(user);
         String dateString = userAnnotationModel.getDate();
 
-        Date dateTypeOfDate = ConvertDate.convertDateAnnotation(dateString);
-
-        String dateStringFormated = ConvertDate.convertDateForDateHour(dateTypeOfDate);
+        String dateStringFormated = ConvertDate.convertDateAnnotation(dateString);
 
         userAnnotationModel.setDate(dateStringFormated);
 
@@ -83,8 +81,7 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
         UserAnnotationModel.setUser(user);
         UserAnnotationModel.setId(id);
         String dateAnnotationModel = UserAnnotationModel.getDate();
-        Date dateConverted = ConvertDate.convertDateAnnotation(dateAnnotationModel);
-        String dateConvertedFormated = ConvertDate.convertDateForDateHour(dateConverted);
+        String dateConvertedFormated = ConvertDate.convertDateAnnotation(dateAnnotationModel);
         UserAnnotationModel.setDate(dateConvertedFormated);
 
         UserAnnotationModel = userAnnotationRepository.save(UserAnnotationModel);
