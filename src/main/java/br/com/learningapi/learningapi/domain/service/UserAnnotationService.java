@@ -50,7 +50,7 @@ public class UserAnnotationService implements CrudService<UserAnnotationReqDTO, 
         Optional<UserAnnotation> UserAnnotationModelRepository = userAnnotationRepository.findById(id);
 
         if (UserAnnotationModelRepository.isEmpty()) {
-            throw new ResourceNotFoundException("Centro de custo não encontrado.");
+            throw new ResourceNotFoundException("Id da anotação não encontrado para atualização.");
         }
 
         return mapper.map(UserAnnotationModelRepository.get(), UserAnnotationRespDTO.class);
